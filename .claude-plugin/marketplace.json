@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claude-plugins",
+  "name": "claude-plugins-mine",
   "description": "DiTo97's directory of high-quality plugins for Claude Code.",
   "owner": {
     "name": "Federico Minutoli",
