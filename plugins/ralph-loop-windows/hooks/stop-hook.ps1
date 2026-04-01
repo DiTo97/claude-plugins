@@ -43,7 +43,7 @@ function Unquote-YamlScalar {
 
     if ($trimmed.Length -ge 2 -and $trimmed.StartsWith('"') -and $trimmed.EndsWith('"')) {
         $inner = $trimmed.Substring(1, $trimmed.Length - 2)
-        return $inner.Replace('\"', '"').Replace('\\', '\')
+        return $inner.Replace('\\', '\').Replace('\"', '"')
     }
 
     return $trimmed
@@ -181,7 +181,7 @@ if ($assistantLines.Count -eq 0) {
     )
 }
 
-$textBlocks = [System.Collections.Generic.List[string]]::new()
+$lastMessageTextBlocks = [System.Collections.Generic.List[string]]::new()
 foreach ($assistantLine in $assistantLines.ToArray()) {
     try {
         $entry = $assistantLine | ConvertFrom-Json -Depth 100
@@ -204,15 +204,20 @@ foreach ($assistantLine in $assistantLines.ToArray()) {
         continue
     }
 
+    $currentBlocks = [System.Collections.Generic.List[string]]::new()
     $contentBlocks = $message.content
     foreach ($block in $contentBlocks) {
         if ($null -ne $block -and $block.type -eq 'text') {
-            $null = $textBlocks.Add([string]$block.text)
+            $null = $currentBlocks.Add([string]$block.text)
         }
+    }
+
+    if ($currentBlocks.Count -gt 0) {
+        $lastMessageTextBlocks = $currentBlocks
     }
 }
 
-$lastOutput = if ($textBlocks.Count -gt 0) { $textBlocks[$textBlocks.Count - 1] } else { '' }
+$lastOutput = if ($lastMessageTextBlocks.Count -gt 0) { $lastMessageTextBlocks -join "`n" } else { '' }
 
 if (-not [string]::IsNullOrWhiteSpace($completionPromise)) {
     $promiseMatch = [regex]::Match($lastOutput, '(?s)<promise>(.*?)</promise>')

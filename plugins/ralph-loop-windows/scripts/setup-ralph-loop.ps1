@@ -39,7 +39,8 @@ OPTIONS:
 
 DESCRIPTION:
   Starts a Ralph Loop in your CURRENT session. The stop hook prevents
-  exit and feeds your output back as input until completion or iteration limit.
+  exit and replays the same prompt each iteration; self-reference comes from
+  persisted files and the loop transcript until completion or iteration limit.
 
   To signal completion, you must output: <promise>YOUR_PHRASE</promise>
 
