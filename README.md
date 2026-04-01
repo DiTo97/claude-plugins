@@ -1,2 +1,3 @@
 # claude-plugins
-high-quality Claude Code plugins
+
+directory of high-quality plugins for Claude Code.
