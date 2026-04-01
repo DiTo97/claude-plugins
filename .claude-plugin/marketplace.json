@@ -1,0 +1,22 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-plugins",
+  "description": "DiTo97's directory of high-quality plugins for Claude Code.",
+  "owner": {
+    "name": "Federico Minutoli",
+    "email": "fede97.minutoli@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "ralph-loop-windows",
+      "description": "Windows-native PowerShell 7+ fork of Ralph Wiggum loop for Claude Code.",
+      "author": {
+        "name": "Federico Minutoli",
+        "email": "fede97.minutoli@gmail.com"
+      },
+      "source": "./plugins/ralph-loop-windows",
+      "category": "development",
+      "homepage": "https://github.com/DiTo97/claude-plugins/tree/main/plugins/ralph-loop-windows"
+    }
+  ]
+}
